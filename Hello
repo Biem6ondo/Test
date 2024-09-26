@@ -1,0 +1,1 @@
+echo -n "print('hello')" | base64
