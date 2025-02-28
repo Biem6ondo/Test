@@ -1,0 +1,509 @@
+local current_version = "V1.0.63"
+
+if not isfolder('Animation-Saved') then
+    makefolder('Animation-Saved')
+end
+
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local MarketplaceService = game:GetService("MarketplaceService")
+local CoreGui = game.CoreGui
+local ScreenGui = Instance.new("ScreenGui", CoreGui)
+local Toggle = Instance.new("ImageButton", ScreenGui)
+local Title = Instance.new("ImageButton", ScreenGui)
+local MainFrame = Instance.new("ImageButton", Title) MainFrame.Name = "MainFrame"
+local Frame = Instance.new("ImageButton", MainFrame) Frame.Name = "Frame"
+local ReSize = Instance.new("ImageButton", MainFrame) ReSize.Name = "ReSize"
+local CloseButton = Instance.new("ImageButton", Title)
+local TitileText = Instance.new("TextButton", Title) TitileText.Name = "TitileText"
+local pr = Instance.new("Frame", MainFrame)
+local Info = Instance.new("TextLabel", Frame)
+local rmlist = Instance.new("ScrollingFrame", Frame)
+local rmtext = Instance.new("ScrollingFrame", Frame)
+local rmtextr = Instance.new("TextLabel", rmtext)
+local frametwo = Instance.new("Frame", Frame)
+local PlayButton = Instance.new("TextButton", Info) PlayButton.Name = "PlayButton"
+local StopButton = Instance.new("TextButton", Info) StopButton.Name = "StopButton"
+local SaveAllButton = Instance.new("TextButton") SaveAllButton.Name = "SaveAllButton"
+local CopyButton = Instance.new("ImageButton", Info) CopyButton.Name = "copybutton"
+local q = Instance.new("TextButton", Info) q.Name = "Show_Text_AnimId"
+local sel = Instance.new("TextButton", Title)
+local sel_ic = Instance.new("UICorner", sel) sel_ic.CornerRadius = UDim.new(1, 0) sel.Name = "sel"
+local menu_background = Instance.new("ImageButton", MainFrame) menu_background.Name = "menu_background"
+local menu = Instance.new("ScrollingFrame", menu_background) menu.Name = "menu"
+local File_Name_Frame = Instance.new("Frame", ScreenGui) File_Name_Frame.Name = "ChangeName"
+local jsj = Instance.new("UICorner", File_Name_Frame) jsj.CornerRadius = UDim.new(0, 15)
+local Add_File_TextBox = Instance.new("TextBox", File_Name_Frame) Add_File_TextBox.Name = "Add_File_TextBox"
+local Add_File_TextBox_UICorner = Instance.new("UICorner", Add_File_TextBox)
+Add_File_TextBox_UICorner.CornerRadius = UDim.new(1, 0)
+local Add_File_TextLabel = Instance.new("TextLabel", File_Name_Frame) Add_File_TextLabel.Name = "Add_File_TextLabel"
+local Close_File_Button = Instance.new("TextButton")
+local Choosed_File_Frame = Instance.new("ImageButton", MainFrame)
+local Choosed_File_Frame_Button = Instance.new("ImageButton", Choosed_File_Frame)
+
+-- Script Stuff =============================================================
+local function crmn(pos, text, func)
+    local crkan = Instance.new("TextButton", menu)
+    crkan.Name = text
+    crkan.Position = UDim2.new(0, 0, 0, pos)
+    crkan.Text = text
+    crkan.Size = UDim2.new(1, 0, 0, 30)
+    crkan.MouseButton1Click:Connect(func)
+end
+
+local function crmc(pos, text, func)
+    local Choosed_File_Frame_Button_New = Instance.new("TextButton", Choosed_File_Frame_Button)
+    Choosed_File_Frame_Button_New.Name = text
+    Choosed_File_Frame_Button_New.Position = UDim2.new(0, 0, 0, pos)
+    Choosed_File_Frame_Button_New.Text = text
+    Choosed_File_Frame_Button_New.Size = UDim2.new(1, 0, 0, 30)
+    Choosed_File_Frame_Button_New.MouseButton1Click:Connect(func)
+Choosed_File_Frame_Button_New.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+Choosed_File_Frame_Button_New.TextColor3 = Color3.new(1, 1, 1)
+end
+
+-- Create Menu Button ====================================================
+crmn(0, "Animation Scanner", function()
+menu_background.Visible = false
+sel.Text = "  V Animation Scanner"
+end)
+
+crmn(60, "Save All", function()
+File_Name_Frame.Visible = true
+menu_background.Visible = false
+sel.Text = "  V Save All"
+end)
+
+-- Edit stuff ==============================================================
+Choosed_File_Frame_Button.Size = UDim2.new(0.5, 0, 1, 0)
+Choosed_File_Frame_Button.Position = UDim2.new(0.5, 0, 0, 0)
+Choosed_File_Frame_Button.AutoButtonColor = false
+Choosed_File_Frame_Button.BackgroundColor3 = Color3.new(1, 1, 1)
+
+Toggle.Size = UDim2.new(0, 50, 0, 50)
+Toggle.Position = UDim2.new(0, 0, 0.5, 0)
+Toggle.MouseButton1Click:Connect(function()
+Title.Visible = not Title.Visible
+end)
+Toggle.Active = true
+Toggle.Draggable = true
+Toggle.Image = "rbxthumb://type=Asset&id=3576968026&w=420&h=420"
+Toggle.ImageColor3 = Color3.new(0, 0, 0)
+Toggle.BackgroundTransparency = 1
+
+Choosed_File_Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+Choosed_File_Frame.Size = UDim2.new(1, 0, 1, 0)
+Choosed_File_Frame.BackgroundTransparency = 0.35
+Choosed_File_Frame.MouseButton1Click:Connect(function()
+Choosed_File_Frame.Visible = false
+end)
+
+Add_File_TextLabel.Position = UDim2.new(0.5, 0, 0, 30)
+Add_File_TextLabel.TextColor3 = Color3.new(1, 1, 1)
+Add_File_TextLabel.Text = "Save Animation"
+Add_File_TextLabel.TextSize = 24
+
+Add_File_TextBox.Size = UDim2.new(0, 290, 0, 30)
+Add_File_TextBox.Position = UDim2.new(0, 30, 0, 100)
+Add_File_TextBox.Text = ""
+Add_File_TextBox.PlaceholderText = ""
+Add_File_TextBox.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
+
+File_Name_Frame.Size = UDim2.new(0, 350, 0, 200)
+File_Name_Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+File_Name_Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+File_Name_Frame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+File_Name_Frame.Visible = false
+
+menu.Size = UDim2.new(0.8, 0, 0.9, 0)
+menu.Position = UDim2.new(0.5, 0, 0.5, 0)
+menu.AnchorPoint = Vector2.new(0.5, 0.5)
+menu.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+
+menu_background.Size = UDim2.new(1, 0, 1, 0)
+menu_background.BackgroundColor3 = Color3.new(0, 0, 0)
+menu_background.BackgroundTransparency = 0.5
+menu_background.AutoButtonColor = false
+menu_background.Visible = false
+
+sel.Size = UDim2.new(0.3, 0, 0, 17)
+sel.Position = UDim2.new(0.6, 0, 0, 5)
+sel.Text = "  V Animation Scanner"
+sel.TextXAlignment = Enum.TextXAlignment.Left
+sel.TextColor3 = Color3.new(0, 0, 0)
+sel.BackgroundColor3 = Color3.new(1, 1, 1)
+sel.MouseButton1Click:Connect(function()
+menu_background.Visible = not menu_background.Visible
+end)
+
+q.Size = UDim2.new(1, 0, 0, 30)
+q.Position = UDim2.new(0, 0, 0.85, 0)
+q.TextScaled = true
+q.TextColor3 = Color3.new(0, 0, 0)
+q.BackgroundColor3 = Color3.new(1, 1, 1)
+q.Visible = false
+q.MouseEnter:Connect(function()
+q.Visible = true
+setclipboard(q.Text)
+end)
+q.MouseLeave:Connect(function()
+q.Visible = false
+end)
+
+CopyButton.Size = UDim2.new(0, 30, 0, 30)
+CopyButton.Position = UDim2.new(0.85, 0, 0.15, 0)
+CopyButton.BackgroundTransparency = 1
+CopyButton.Image = "rbxassetid://5448127505"
+CopyButton.MouseButton1Click:Connect(function()
+setclipboard(Info.Text)
+end)
+
+PlayButton.Text = "Play"
+PlayButton.Size = UDim2.new(0.9, 0, 0.15, 0)
+PlayButton.Position = UDim2.new(0.05, 0, 0.3, 0)
+PlayButton.BackgroundColor3 = Color3.new(0, 0, 0)
+PlayButton.TextColor3 = Color3.new(1, 1, 1)
+PlayButton.Font = Enum.Font.SourceSansBold
+PlayButton.TextSize = 24
+
+StopButton.Text = "Stop"
+StopButton.Size = UDim2.new(0.9, 0, 0.15, 0)
+StopButton.Position = UDim2.new(0.05, 0, 0.5, 0)
+StopButton.BackgroundColor3 = Color3.new(0, 0, 0)
+StopButton.TextColor3 = Color3.new(1, 1 ,1)
+StopButton.Font = Enum.Font.SourceSansBold
+StopButton.TextSize = 24
+
+SaveAllButton.Text = "Save All!"
+SaveAllButton.Size = UDim2.new(0, 290, 0, 30)
+SaveAllButton.Position = UDim2.new(0, 10, 0.7, 0)
+SaveAllButton.BackgroundColor3 = Color3.new(0, 0, 0)
+SaveAllButton.TextColor3 = Color3.new(1, 1, 1)
+SaveAllButton.Font = Enum.Font.SourceSansBold
+SaveAllButton.TextSize = 24
+SaveAllButton.Parent = File_Name_Frame
+
+Close_File_Button.Text = "X"
+Close_File_Button.Size = UDim2.new(0, 30, 0, 30)
+Close_File_Button.Position = UDim2.new(0, 310, 0.7, 0)
+Close_File_Button.BackgroundColor3 = Color3.new(0, 0, 0)
+Close_File_Button.TextColor3 = Color3.new(1, 1, 1)
+Close_File_Button.Font = Enum.Font.SourceSansBold
+Close_File_Button.TextSize = 24
+Close_File_Button.Parent = File_Name_Frame
+Close_File_Button.MouseButton1Click:Connect(function()
+File_Name_Frame.Visible = false
+sel.Text = "  V Not current selection"
+end)
+
+-- Frame
+Frame.Size = UDim2.new(1, 0, 1, 0)
+Frame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+Frame.Name = "Frame"
+Frame.AutoButtonColor = false
+
+-- Title
+Title.Size = UDim2.new(0, 370, 0, 30)
+Title.Position = UDim2.new(0.5, 0, 0.5, 0)
+Title.AnchorPoint = Vector2.new(0.5, 0.5)
+Title.Active = true
+Title.Draggable = true
+Title.Name = "Title"
+Title.BackgroundColor3 = Color3.new(0, 0, 0)
+Title.AutoButtonColor = false
+Title.BorderSizePixel = 0
+
+-- Screen Gui
+ScreenGui.Name = "gmSpy"
+ScreenGui.IgnoreGuiInset = true
+
+-- Main Frame
+MainFrame.Size = UDim2.new(0, 370, 0, 220)
+MainFrame.Position = UDim2.new(0, 0, 0, 30)
+MainFrame.BackgroundTransparency = 1
+
+-- ReSize
+ReSize.Size = UDim2.new(0, 30, 0, 30)
+ReSize.Position = UDim2.new(1, 0, 1, 0)
+ReSize.AnchorPoint = Vector2.new(1, 1)
+ReSize.BackgroundTransparency = 1
+
+-- Close Button
+CloseButton.Size = UDim2.new(0, 20, 0, 20)
+CloseButton.Position = UDim2.new(0, 340, 0, 5)
+CloseButton.Image = "rbxassetid://5054663650"
+CloseButton.BackgroundTransparency = 1
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- TitileText
+TitileText.Size = UDim2.new(0.4, 0, 1, 0)
+TitileText.BackgroundTransparency = 1
+TitileText.TextTransparency = 0
+TitileText.Text = "ダウンロードされていません 完了"
+TitileText.TextScaled = true
+TitileText.TextColor3 = Color3.new(1, 1, 1)
+TitileText.MouseButton1Click:Connect(function()
+    TitileText.Text = current_version
+    TitileText.TextColor3 = Color3.new(1, 0, 0)
+    wait(1)
+    TitileText.Text = "Animation Scanner"
+    wait(0.1)
+    TitileText.TextColor3 = Color3.new(1, 1, 1)
+end)
+TitileText.Font = Enum.Font.Cartoon
+
+-- Resize Function (Touch & Mouse)
+local UIS = game:GetService("UserInputService")
+local resizing = false
+local startPos, startSize
+
+local function startResize(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        resizing = true
+        startPos = input.Position
+        startSize = MainFrame.Size
+    end
+end
+
+local function updateResize(input)
+    if resizing and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - startPos
+        local newSize = UDim2.new(0, math.max(150, startSize.X.Offset + delta.X), 0, math.max(100, startSize.Y.Offset + delta.Y))
+        MainFrame.Size = newSize
+    end
+end
+
+local function stopResize(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        resizing = false
+    end
+end
+
+ReSize.InputBegan:Connect(startResize)
+UIS.InputChanged:Connect(updateResize)
+UIS.InputEnded:Connect(stopResize)
+
+-- pr
+pr.Size = UDim2.new(1, 0, 0, 30)
+pr.Position = UDim2.new(0, 0, 0, -30)
+pr.BackgroundColor3 = Color3.new(0, 0, 0)
+pr.ZIndex = 0
+
+-- remote list
+rmlist.Size = UDim2.new(0.3, 0, 1, 0)
+rmlist.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+rmlist.ScrollingDirection = Enum.ScrollingDirection.Y
+rmlist.ScrollBarThickness = 2
+rmlist.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+Info.Size = UDim2.new(0.7, 0, 1, 0)
+Info.Text = "\nChoose Animation"
+Info.Position = UDim2.new(0.3, 0, 0, 0)
+Info.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+Info.TextColor3 = Color3.new(1, 1, 1)
+Info.TextSize = 8
+Info.TextYAlignment = Enum.TextYAlignment.Top
+
+-- Animation fetching and display logic
+local animations = {}
+local selectedAnimationId
+local selectedButton
+
+local function getAnimationNameById(animationId)
+    local success, result = pcall(function()
+        return MarketplaceService:GetProductInfo(tonumber(string.match(animationId, "%d+")))
+    end)
+
+    if success and result then  
+        return result.Name  
+    else  
+        return "Unknown Animation"  
+    end
+end
+
+local function updateList()
+    rmlist:ClearAllChildren()
+    local yOffset = 0
+    for animationId, animationName in pairs(animations) do
+        local FrameItem = Instance.new("Frame", rmlist)
+        FrameItem.Size = UDim2.new(1, 0, 0, 30)
+        FrameItem.Position = UDim2.new(0, 0, 0, yOffset)
+        FrameItem.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+
+        local Label = Instance.new("TextLabel", FrameItem)  
+        Label.Text = animationName  
+        Label.Size = UDim2.new(0.5, 0, 1, 0)  
+        Label.Position = UDim2.new(0, 5, 0, 0)  
+        Label.TextXAlignment = Enum.TextXAlignment.Left  
+        Label.BackgroundTransparency = 1  
+Label.TextSize = 15
+Label.Font = Enum.Font.SourceSansBold
+
+        local SelectButton = Instance.new("TextButton", FrameItem)  
+        SelectButton.Text = ""  
+        SelectButton.Size = UDim2.new(1, 0, 1, 0)  
+SelectButton.BackgroundColor3 = Color3.new(1, 1, 1)
+SelectButton.BackgroundTransparency = 0.5
+        SelectButton.MouseButton1Click:Connect(function()
+            if selectedButton then
+                selectedButton.BackgroundColor3 = Color3.new(1, 1, 1)
+            end
+Info.Text = "\nID: " .. animationId .. "\nName: " .. animationName
+            selectedAnimationId = animationId
+            selectedButton = SelectButton
+            SelectButton.BackgroundColor3 = Color3.new(0, 0, 0)
+PlayButton.TextColor3 = Color3.new(1, 1, 1)
+        end)
+
+SelectButton.MouseEnter:Connect(function()
+q.Visible = true
+q.Text = animationId
+end)
+SelectButton.MouseLeave:Connect(function()
+q.Visible = false
+q.Text = animationId
+end)
+
+local isPressing = false
+local holdDuration = 1
+
+SelectButton.MouseButton2Click:Connect(function()
+   Choosed_File_Frame.Visible = true
+end)
+
+SelectButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch then
+        isPressing = true
+        task.delay(holdDuration, function()
+            if isPressing then
+Choosed_File_Frame.Visible = true
+            end
+        end)
+    end
+end)
+SelectButton.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch then
+        isPressing = false
+    end
+end)
+
+
+        yOffset = yOffset + 30  
+    end  
+    rmlist.CanvasSize = UDim2.new(0, 0, 0, yOffset)
+end
+
+local function trackAnimations()
+    while true do
+        task.wait(0)
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player.Character and player.Character:FindFirstChild("Humanoid") then
+                for _, track in ipairs(player.Character.Humanoid:GetPlayingAnimationTracks()) do
+                    local animationId = track.Animation.AnimationId
+                    local animationName = getAnimationNameById(animationId)
+                    if not animations[animationId] then
+                        animations[animationId] = animationName
+                        updateList()
+                    end
+                end
+            end
+        end
+    end
+end
+
+PlayButton.MouseButton1Click:Connect(function()
+PlayButton.TextColor3 = Color3.new(0, 1, 0)
+    if selectedAnimationId and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        local animation = Instance.new("Animation")
+        animation.AnimationId = selectedAnimationId
+        LocalPlayer.Character.Humanoid:LoadAnimation(animation):Play()
+    end
+end)
+
+StopButton.MouseButton1Click:Connect(function()
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        for _, track in ipairs(LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+            track:Stop()
+PlayButton.TextColor3 = Color3.new(1, 1, 1)
+        end
+    end
+end)
+
+SaveAllButton.MouseButton1Click:Connect(function()
+    local fileName = "Animation-Saved/" .. tostring(Add_File_TextBox.Text) .. ".animationsaved"
+    local fileContent = "Hello! Please dont re-write this file, you can't load this file!\n"
+    for animationId, animationName in pairs(animations) do
+        fileContent = fileContent .. "[" .. animationName .. "]: " .. animationId .. "\n"
+    end
+
+    writefile(fileName, fileContent)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Saved",
+        Text = "Animations saved to " .. fileName,
+        Duration = 5
+    })
+sel.Text = "  V Not current selection"
+File_Name_Frame.Visible = false
+end)
+
+coroutine.wrap(trackAnimations)()
+
+crmn(30, "Load Animation", function()
+menu_background.Visible = false
+sel.Text = "  V Load Animation"
+local FileListFrame = Instance.new("ScrollingFrame", ScreenGui)
+FileListFrame.Size = UDim2.new(0, 300, 0, 300)
+FileListFrame.Position = UDim2.new(0.5, -150, 0.5, -150)
+FileListFrame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+FileListFrame.ScrollBarThickness = 0
+FileListFrame.Visible = false
+
+FileListFrame:ClearAllChildren()
+    FileListFrame.Visible = not FileListFrame.Visible
+
+    local files = listfiles("Animation-Saved/") 
+    local yOffset = 0
+
+    for _, file in ipairs(files) do
+        if file:match("%.animationsaved$") then
+            local FileButton = Instance.new("TextButton", FileListFrame)
+            FileButton.Text = file
+            FileButton.Size = UDim2.new(1, 0, 0, 30)
+            FileButton.Position = UDim2.new(0, 0, 0, yOffset)
+            FileButton.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+
+            FileButton.MouseButton1Click:Connect(function()
+                local content = readfile(file)
+                for line in content:gmatch("[^\r\n]+") do
+                    local name, id = line:match("%[(.-)%]: (.+)")
+                    if name and id then
+                        local assetId = id:match("(%d+)$") 
+                        if assetId then
+                            animations["rbxassetid://" .. assetId] = name
+                        end
+                    end
+                end
+                FileListFrame:Destroy()
+sel.Text = "  V Not current selection"
+                updateList() 
+            end)
+
+            yOffset = yOffset + 30
+        end
+    end
+    FileListFrame.CanvasSize = UDim2.new(0, 0, 0, yOffset)
+end)
+
+crmc(60, "Copy Anim ID", function()
+setclipboard(animationId)
+end)
+
+-- More function
+local text = "Animation Scanner"
+for i = 1, #text do
+    TitileText.Text = text:sub(1, i)
+    wait(0.2)
+end
