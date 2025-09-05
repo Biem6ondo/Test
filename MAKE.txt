@@ -1,6 +1,6 @@
 -- Now, open source! test
 
-local gameId = 102276247884041
+local gameId = 86780775958445
 
 if game.PlaceId == gameId then
 
