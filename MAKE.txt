@@ -103,7 +103,7 @@ local Input = Tab:CreateInput({
 	end,
 })
 
-local Button = Tab:CreateButton({
+local btn = Tab:CreateButton({
 	Name = "Send",
 	Callback = function()
 		local now = os.time()
