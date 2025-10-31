@@ -7,7 +7,6 @@ if everyGame then
 
 if not _G.hasRunOnce then
     _G.hasRunOnce = true
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Shiftlock-22314"))()
 
 local player = game.Players.LocalPlayer
 
