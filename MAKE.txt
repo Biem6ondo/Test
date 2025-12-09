@@ -71,7 +71,7 @@ end)
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
-   Name = "DrayvenX beta",
+   Name = "DrayvenX (Stop updates until 1/2026)",
    Icon = 0,
    LoadingTitle = "Wait...",
    LoadingSubtitle = "",
@@ -87,6 +87,7 @@ openUrl("https://www.roblox.com/users/3154785632/profile", "Cat")
 end,
 })
 
+local down = true
 local HttpService = game:GetService("HttpService")
 local player = game.Players.LocalPlayer
 local FORMSPREE_ID = "mdkdrjdl"
@@ -169,6 +170,7 @@ Tab:CreateInput({
 local FeedbackButton = Tab:CreateButton({
     Name = "Send",
     Callback = function()
+if not down then
         local now = os.time()
         if now - lastSend < cooldownSeconds then
             Rayfield:Notify({
@@ -239,6 +241,13 @@ local FeedbackButton = Tab:CreateButton({
 
         task.wait(2)
         if FeedbackButton and type(FeedbackButton.Set) == "function" then pcall(function() FeedbackButton:Set("Send") end) end
+else
+Rayfield:Notify({
+                Title = "Error",
+                Content = "No connection",
+                Duration = 3
+            })
+end
     end,
 })
 
