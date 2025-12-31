@@ -71,7 +71,7 @@ end)
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
-   Name = "DrayvenX (Stop updates until 1/2026)",
+   Name = "DrayvenX | Happy New Year 2026!!!",
    Icon = 0,
    LoadingTitle = "Wait...",
    LoadingSubtitle = "",
