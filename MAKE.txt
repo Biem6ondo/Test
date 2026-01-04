@@ -71,7 +71,7 @@ end)
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
-   Name = "DrayvenX | Happy New Year 2026!!!",
+   Name = "DrayvenX",
    Icon = 0,
    LoadingTitle = "Wait...",
    LoadingSubtitle = "",
@@ -87,7 +87,7 @@ openUrl("https://www.roblox.com/users/3154785632/profile", "Cat")
 end,
 })
 
-local down = true
+local down = false
 local HttpService = game:GetService("HttpService")
 local player = game.Players.LocalPlayer
 local FORMSPREE_ID = "mdkdrjdl"
