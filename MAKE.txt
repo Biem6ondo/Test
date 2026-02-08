@@ -36,6 +36,10 @@ end
 	end
 end
 
+_G.destroyObject = function(obj)
+destroyObject(obj)
+end
+
 local function openUrl(url, title)
 local GuiService = game:GetService("GuiService")
 local HttpService = game:GetService("HttpService")
